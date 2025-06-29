@@ -10,7 +10,7 @@
 
 ![演示](./example.gif)
 
----
+
 
 
 
@@ -25,7 +25,7 @@ IMAGE_ROOT = "D:/dataset/test_images"                             # 原始图像
 test_images 里可以有多个子文件夹。
 只要 json 中 `"image"` 字段的路径和 `IMAGE_ROOT` 对齐，就没问题。
 
----
+
 
 ## 📁 数据格式说明
 
@@ -42,7 +42,7 @@ test_images 里可以有多个子文件夹。
 {"image": "grasp/0002.jpg", "question": "图中是什么目标？", "answer": "右边的车"}
 ```
 
----
+
 ## 🚀 启动方式
 
 ### 启动标注工具
@@ -53,7 +53,7 @@ python sam_annotation_tool.py
 
 默认会启动本地服务在 `http://127.0.0.1:7861`，打开浏览器访问即可开始标注。
 
----
+
 
 ## 🖱️ 使用方式
 
@@ -82,7 +82,7 @@ python sam_annotation_tool.py
 
 
 
----
+
 
 ## 🧠 模型说明
 
