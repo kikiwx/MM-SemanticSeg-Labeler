@@ -1,6 +1,11 @@
 
 # 🛠️ MM-SemanticSeg-Labeler
+![标注方式: 半自动](https://img.shields.io/badge/标注方式-半自动-20C997?style=flat-square)
+![操作模式: 点选标注](https://img.shields.io/badge/操作模式-点选标注-17A2B8?style=flat-square)
+![框架: Gradio](https://img.shields.io/badge/交互框架-Gradio-138496?style=flat-square)
 
+
+>  🤖  **自动方法搞不定？那就亲自上阵！**  
 
 本项目提供了一款多模态**语义分割**数据标注工具，旨在提升标注效率与精准度。该工具通过可视化呈现图像和文字标注，帮助用户直观地进行分割掩码标注。用户可以轻松点击图像进行正负样本标注，并实时编辑或添加文本标注。
 ## ✨ 功能特点
@@ -12,19 +17,31 @@
 ![演示](./example.gif)
 
 
+## 🔧 配置说明
 
-
-
-## 🔧 路径配置说明
-
-你可以根据自己的数据集位置修改以下两个路径变量：
+所有配置项，包括模型路径、数据路径、输出目录以及应用设置，都已集中到 `config.py` 文件中。你可以直接编辑 `config.py` 来根据你的环境和需求进行配置。
 
 ```python
+# config.py 示例
+SAM_CHECKPOINT = "sam_vit_h_4b8939.pth"  # SAM 模型权重文件路径
+MODEL_TYPE = "vit_h"                     # SAM 模型类型
+
 JSON_PATH = "D:/dataset/test_images/grasp_test_annotation.json"  # JSON 标注文件路径
-IMAGE_ROOT = "D:/dataset/test_images"                             # 原始图像所在总目录
+IMAGE_ROOT = "D:/dataset/test_images"                             # 原始图像所在目录
+
+RESULTS_DIR = "results"             # 分割结果保存目录
+GOOD_EXAMPLES_DIR = "good_examples" # 优秀示例保存目录
+BAD_EXAMPLES_DIR = "bad_examples"   # 无法标注示例保存目录
+
+POINT_HISTORY_LIMIT = 100 # 撤销/重做历史记录的最大步数
+
+SERVER_NAME = "127.0.0.1" # Gradio 服务监听地址
+SERVER_PORT = 7861        # Gradio 服务监听端口
+# ... 其他 Gradio 启动参数
 ```
-test_images 里可以有多个子文件夹。
-只要 json 中 `"image"` 字段的路径和 `IMAGE_ROOT` 对齐，就没问题。
+
+`IMAGE_ROOT` 下可以有多个子文件夹。只要 JSON 中 `"image"` 字段的路径和 `IMAGE_ROOT` 对齐，即可正常工作。
+
 
 
 
