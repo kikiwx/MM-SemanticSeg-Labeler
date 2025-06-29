@@ -2,7 +2,7 @@
 # 🛠️ MM-SemanticSeg-Labeler
 
 
-本项目基于 Segment Anything Model (SAM) 和 Gradio 构建，提供了一款多模态数据标注工具，旨在 可视化呈现 JSON 中的 "问题" 和 "答案" 字段，用户可以根据这些字段直观地进行分割掩码标注，从而提升标注的 效率 和 精准度。用户可以通过点击图像快速完成正负样本的标注，同时支持对语义问题与答案的编辑。
+本项目提供了一款多模态**语义分割**数据标注工具，旨在提升标注效率与精准度。该工具通过可视化呈现图像和文字标注，帮助用户直观地进行分割掩码标注。用户可以轻松点击图像进行正负样本标注，并实时编辑或添加文本标注。
 ## ✨ 功能特点
 
 - ✅ **支持交互式点选分割**
@@ -55,6 +55,15 @@ python sam_annotation_tool.py
 默认会启动本地服务在 `http://127.0.0.1:7861`，打开浏览器访问即可开始标注。
 
 
+## 🧠 模型说明
+
+本工具使用的是 Meta AI 发布的 [SAM](https://github.com/facebookresearch/segment-anything) 模型，确保你下载了权重并放置在配置位置：
+
+```python
+SAM_CHECKPOINT = "sam_vit_h_4b8939.pth"
+MODEL_TYPE = "vit_h"
+```
+![sam](./sam.jpg)
 
 ## 🖱️ 使用方式
 
@@ -85,13 +94,5 @@ python sam_annotation_tool.py
 
 
 
-## 🧠 模型说明
-
-本工具使用的是 Meta AI 发布的 [SAM](https://github.com/facebookresearch/segment-anything) 模型，确保你下载了权重并放置在配置位置：
-
-```python
-SAM_CHECKPOINT = "sam_vit_h_4b8939.pth"
-MODEL_TYPE = "vit_h"
-```
 
 
