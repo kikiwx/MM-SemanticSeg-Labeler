@@ -19,7 +19,7 @@
 
 ## 🔧 配置说明
 
-所有配置项，包括模型路径、数据路径、输出目录以及应用设置，都已集中到 `config.py` 文件中。你可以直接编辑 `config.py` 来根据你的环境和需求进行配置。
+所有配置项，包括模型路径、数据路径、输出目录以及应用设置，都已集中到 `config.py` 文件中。
 
 ```python
 # config.py 示例
@@ -37,12 +37,20 @@ POINT_HISTORY_LIMIT = 100 # 撤销/重做历史记录的最大步数
 
 SERVER_NAME = "127.0.0.1" # Gradio 服务监听地址
 SERVER_PORT = 7861        # Gradio 服务监听端口
-# ... 其他 Gradio 启动参数
+
 ```
 
 `IMAGE_ROOT` 下可以有多个子文件夹。只要 JSON 中 `"image"` 字段的路径和 `IMAGE_ROOT` 对齐，即可正常工作。
 
+## 🧠 模型说明
 
+本工具使用的是 Meta AI 发布的 [SAM](https://github.com/facebookresearch/segment-anything) 模型，确保你下载了权重并放置在配置位置：
+
+```python
+SAM_CHECKPOINT = "sam_vit_h_4b8939.pth"
+MODEL_TYPE = "vit_h"
+```
+![sam](./sam.jpg)
 
 
 ## 📁 数据格式说明
@@ -52,14 +60,19 @@ SERVER_PORT = 7861        # Gradio 服务监听端口
 - `”question"` 对图片的描述或提问 
 - `Answer` 对应问题的文本答案 
 
-注：`”question"`和`Answer` **可以为 None**，如果字段不存在，系统会自动填充为 None。在标注工具界面填写后，内容会自动保存到原始的 JSON 文件中。
+注：`question`和`Answer` **可以为 None**
+
+- 若 question 或 answer 字段缺失，系统会自动补全为 None
+- 用户在标注界面中编辑后，内容将自动写回原始 JSON 文件（覆盖对应行）
+
 示例：
 
 ```json
 {"image": "car/0001.jpg", "question": "图中是什么目标？", "answer": "左边的车"}
 {"image": "airplane/0001.jpg", "question": "图中是什么目标？", "answer": "右边的飞机"}
 ```
-`car`, `airplane`均为test_images下的子文件夹
+示例中`car`, `airplane`均为test_images下的子文件夹
+
 
 ## 🚀 启动方式
 
@@ -71,16 +84,6 @@ python sam_annotation_tool.py
 
 默认会启动本地服务在 `http://127.0.0.1:7861`，打开浏览器访问即可开始标注。
 
-
-## 🧠 模型说明
-
-本工具使用的是 Meta AI 发布的 [SAM](https://github.com/facebookresearch/segment-anything) 模型，确保你下载了权重并放置在配置位置：
-
-```python
-SAM_CHECKPOINT = "sam_vit_h_4b8939.pth"
-MODEL_TYPE = "vit_h"
-```
-![sam](./sam.jpg)
 
 ## 🖱️ 使用方式
 
